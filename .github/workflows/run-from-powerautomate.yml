@@ -1,19 +1,26 @@
-name: test_dispatch
+name: Run from Power Automate
  
 on:
-  workflow_dispatch:
-    inputs:
-      message:
-        description: "Test message"
-        required: true
- 
   repository_dispatch:
     types: [run-from-powerautomate]
  
 jobs:
-  test:
+  run:
     runs-on: ubuntu-latest
  
     steps:
-      - name: Print message
-        run: echo "${{ github.event.inputs.message || github.event.client_payload.message }}"
+      - name: Read input
+        run: |
+          echo "User: ${{ github.event.client_payload.username }}"
+          echo "Message: ${{ github.event.client_payload.message }}"
+ 
+      - name: Generate result
+        run: |
+          RESULT="Hello ${{ github.event.client_payload.username }}"
+          echo "RESULT=$RESULT" >> $GITHUB_ENV
+ 
+      - name: Send result back to Power Automate
+        run: |
+          curl -X POST "${{ secrets.POWER_AUTOMATE_URL }}" \
+          -H "Content-Type: application/json" \
+          -d "{\"result\":\"$RESULT\"}"
