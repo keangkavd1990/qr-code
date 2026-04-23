@@ -1,5 +1,5 @@
 name: test_dispatch
-
+ 
 on:
   workflow_dispatch:
     inputs:
@@ -15,5 +15,5 @@ jobs:
     runs-on: ubuntu-latest
  
     steps:
-  - name: Print message
-    run: echo "${{ github.event.inputs.message || github.event.client_payload.message }}"
+      - name: Print message
+        run: echo "${{ github.event.inputs.message || github.event.client_payload.message }}"
