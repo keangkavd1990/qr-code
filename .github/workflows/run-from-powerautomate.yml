@@ -1,4 +1,10 @@
 on:
+  workflow_dispatch:
+    inputs:
+      message:
+        description: "Test message"
+        required: true
+ 
   repository_dispatch:
     types: [run-from-powerautomate]
  
@@ -7,5 +13,5 @@ jobs:
     runs-on: ubuntu-latest
  
     steps:
-      - name: Print message
-        run: echo "${{ github.event.client_payload.message }}"
+  - name: Print message
+    run: echo "${{ github.event.inputs.message || github.event.client_payload.message }}"
