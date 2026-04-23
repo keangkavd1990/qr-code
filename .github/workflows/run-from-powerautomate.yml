@@ -1,3 +1,5 @@
+name: test_dispatch
+
 on:
   workflow_dispatch:
     inputs:
