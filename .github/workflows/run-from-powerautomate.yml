@@ -1,0 +1,11 @@
+on:
+  repository_dispatch:
+    types: [run-from-powerautomate]
+ 
+jobs:
+  test:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Print message
+        run: echo "${{ github.event.client_payload.message }}"
