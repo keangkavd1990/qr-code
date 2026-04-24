@@ -1,2 +1,2 @@
 # qr-code
-qr-code for safety-talk
+auto qr-code and linked for safety talk daily.
